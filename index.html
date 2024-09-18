@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenAI-Powered SDLC</title>
+</head>
+<body>
+    <h1>GenAI-Powered Development Platform</h1>
+    <form id="genCodeForm">
+        <label for="requirements">Enter Product Requirements:</label><br>
+        <textarea id="requirements" name="requirements" rows="5" cols="40"></textarea><br><br>
+        <button type="submit">Generate Code</button>
+    </form>
+
+    <h2>Generated Code:</h2>
+    <pre id="generatedCode"></pre>
+
+    <script>
+
+        document.getElementById('genCodeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            fetch('/generate_code', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('generatedCode').innerText = data.code;
+            });
+        });
+    </script>
+</body>
+</html>
